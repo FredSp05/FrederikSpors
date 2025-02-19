@@ -1,6 +1,7 @@
 ---
-title: "FrederikSpors"
+title: "Frederik's Website"
 image: headshot.jpeg
 ---
 
-check if this change happens. My name is Frederik Spors. I come from Germany and I am currently a sophomore at Pomona College. I love to play and watch Tennis and Soccer.
+check2 My name is Frederik Spors. I'm from Germany, currently a Sophomore at Pomona College and 20 years old. I love to play and watch Tennis and Soccer.
+
