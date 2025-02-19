@@ -1,6 +1,9 @@
 ---
 title: "CO2_Emission"
 format: html
+execute:
+  warning: false
+  message: false
 ---
 
 ```{r, echo=FALSE}

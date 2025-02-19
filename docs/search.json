@@ -3,32 +3,8 @@
     "objectID": "CO2_Emission.html",
     "href": "CO2_Emission.html",
     "title": "CO2_Emission",
-<<<<<<< HEAD
     "section": "",
-    "text": "Attaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nRows: 12551 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): parent_entity, parent_type, commodity, production_unit\ndbl (3): year, production_value, total_emissions_MtCO2e\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\n\n\n\n\n\n\n\nThis graph shows the change in total emissions over the years. The TidyTuesday used is from 2024-05-21 and the data set comes from Carbon Majors."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "FrederikSpors",
-    "section": "",
-    "text": "check if this change happens. My name is Frederik Spors. I come from Germany and I am currently a sophomore at Pomona College. I love to play and watch Tennis and Soccer."
-  },
-  {
-    "objectID": "Flights_per_Month.html",
-    "href": "Flights_per_Month.html",
-    "title": "Flights_per_Month",
-    "section": "",
-    "text": "Attaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nRows: 7242 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): ISO3\ndbl (6): Year, Month, Total, Domestic, International, Total_OS\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\n\n\n\n\n\nThis line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-=======
-    "section": "",
-    "text": "Attaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nRows: 12551 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): parent_entity, parent_type, commodity, production_unit\ndbl (3): year, production_value, total_emissions_MtCO2e\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\n\n\n\n\n\n\n\nThis graph shows the change in total CO2 emissions since measurements started. The TidyTuesday used is from 2024-05-21 and the data set comes from Carbon Majors."
+    "text": "This graph shows the change in total CO2 emissions since measurements started. The TidyTuesday used is from 2024-05-21 and the data set comes from Carbon Majors."
   },
   {
     "objectID": "index.html",
@@ -42,14 +18,13 @@
     "href": "Flights_per_Month.html",
     "title": "Flights_per_Month",
     "section": "",
-    "text": "Attaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nRows: 7242 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): ISO3\ndbl (6): Year, Month, Total, Domestic, International, Total_OS\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\n\n\n\n\n\nThis line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop."
+    "text": "This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
->>>>>>> 0ecd78c88e1d5486e18815b59ab9a6e9b530d4d6
     "text": "Link to the Website: https://github.com/FredSp05/FrederikSpors"
   }
 ]

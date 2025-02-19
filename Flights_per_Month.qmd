@@ -1,6 +1,9 @@
 ---
 title: "Flights_per_Month"
 format: html
+execute:
+  warning: false
+  message: false
 ---
 
 ```{r, echo=FALSE}
