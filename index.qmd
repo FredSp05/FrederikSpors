@@ -1,11 +1,6 @@
 ---
-title: "FrederikSpors"
+title: "Frederik's Website"
+image: headshot.jpeg
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+My name is Frederik Spors. I'm from Germany, currently a Sophomore at Pomona College and 20 years old. I love to play and watch Tennis and Soccer.

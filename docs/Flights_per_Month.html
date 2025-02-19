@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – FrederikSpors</title>
+<title>Flights_per_Month – FrederikSpors</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">Flights_per_Month</h1>
 </div>
 
 
@@ -147,7 +147,40 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Link to the Website: <a href="https://github.com/FredSp05/FrederikSpors" class="uri">https://github.com/FredSp05/FrederikSpors</a></p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 7242 Columns: 7
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): ISO3
+dbl (6): Year, Month, Total, Domestic, International, Total_OS
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Flights_per_Month_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop.</p>
 
 
 

@@ -1,0 +1,29 @@
+---
+title: "Flights_per_Month"
+format: html
+---
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+monthly_passengers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-12-24/monthly_passengers.csv')
+
+monthly_totals <- monthly_passengers |>
+  group_by(Month) |>
+  summarise(total_flights = sum(Total, na.rm = TRUE)) |>
+  arrange(Month)
+
+ggplot(monthly_totals, aes(x = Month, y = total_flights, group = 1)) +
+  geom_line(color = "red") + 
+  geom_point(alpha = 0.2) +
+  labs(title = "Total Number of Flights per Month",
+       x = "Month",
+       y = "Total Flights (in thousands)") +
+  theme_minimal() +
+  scale_x_continuous(breaks = 1:12, labels = 1:12)
+
+```
+
+This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop.

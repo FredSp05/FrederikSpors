@@ -9,6 +9,13 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - text: "Data Viz"
+        menu: 
+         - text: "Flights"
+           href: Flights_per_Month.qmd
+         - text: "Carbon Emission"
+           href: CO2_Emission.qmd
+
 
 format:
   html:
