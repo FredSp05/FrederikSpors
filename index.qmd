@@ -1,11 +1,6 @@
 ---
 title: "FrederikSpors"
+image: headshot.jpeg
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+check if this change happens. My name is Frederik Spors. I come from Germany and I am currently a sophomore at Pomona College. I love to play and watch Tennis and Soccer.

@@ -1,0 +1,26 @@
+---
+title: "CO2_Emission"
+format: html
+---
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+emissions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-05-21/emissions.csv')
+
+annual_emissions <- emissions |>
+  group_by(year) |>
+  summarise(total_emissions = sum(total_emissions_MtCO2e, na.rm = TRUE))
+
+ggplot(annual_emissions, aes(x = year, y = total_emissions)) +
+  geom_line(color = "blue", size = 1) +
+  geom_point(alpha = 0.2) +
+  labs(title = "Total Emissions Over The Years",
+       x = "Year",
+       y = "Total Emissions (MtCO2e)") +
+  theme_minimal()
+```
+
+This graph shows the change in total emissions over the years. The TidyTuesday used is from 2024-05-21 and the data set comes from Carbon Majors.
