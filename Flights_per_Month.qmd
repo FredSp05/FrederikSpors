@@ -30,3 +30,5 @@ ggplot(monthly_totals, aes(x = Month, y = total_flights, group = 1)) +
 ```
 
 This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop.
+
+Source: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2022/2022-07-12/readme.md>

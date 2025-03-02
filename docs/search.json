@@ -1,10 +1,24 @@
 [
   {
-    "objectID": "CO2_Emission.html",
-    "href": "CO2_Emission.html",
-    "title": "CO2_Emission",
+    "objectID": "Netflix.html",
+    "href": "Netflix.html",
+    "title": "Netflix",
     "section": "",
-    "text": "This graph shows the change in total CO2 emissions since measurements started. The TidyTuesday used is from 2024-05-21 and the data set comes from Carbon Majors."
+    "text": "The graph shows a steady increase in the number of Netflix titles containing “Love” from 2009 to 2020, with its peak in 2019. There was a slight decline in 2020 and then a large drop to nearly zero in 2021, likely due to filming delays caused by COVID-19.\n\n\n\n\n\n\n\n\n\nThe bar graph shows whether more movies or TV shows with “Love” in the title were released in 2019, the year with the most releases with “Love” in the title on Netflix From the graph we can see that 35 of the releases were movies and 20 were TV shows, indicating that Netflix produced nearly twice as many movies with “Love” in the title compared to TV shows that year.\nSources: https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md https://www.kaggle.com/datasets/shivamb/netflix-shows"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Link to the Website: https://github.com/FredSp05/FrederikSpors"
+  },
+  {
+    "objectID": "Flights_per_Month.html",
+    "href": "Flights_per_Month.html",
+    "title": "Flights_per_Month",
+    "section": "",
+    "text": "This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop.\nSource: https://github.com/rfordatascience/tidytuesday/blob/main/data/2022/2022-07-12/readme.md"
   },
   {
     "objectID": "index.html",
@@ -14,17 +28,10 @@
     "text": "My name is Frederik Spors. I’m from Germany, currently a Sophomore at Pomona College and 20 years old. I love to play and watch Tennis and Soccer."
   },
   {
-    "objectID": "Flights_per_Month.html",
-    "href": "Flights_per_Month.html",
-    "title": "Flights_per_Month",
+    "objectID": "CO2_Emission.html",
+    "href": "CO2_Emission.html",
+    "title": "CO2_Emission",
     "section": "",
-    "text": "This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "Link to the Website: https://github.com/FredSp05/FrederikSpors"
+    "text": "This graph shows the change in total CO2 emissions since measurements started. The TidyTuesday used is from 2024-05-21 and the data set comes from Carbon Majors.\nSource: https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-05-21/readme.md"
   }
 ]
