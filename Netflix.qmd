@@ -48,7 +48,7 @@ ggplot(love_2019, aes(x = type, y = n, fill = type)) +
   labs(title = "Netflix Movies vs TV Shows Containing 'Christmas' Added in 2019", 
        x = "Type", y = "Count")
 ```
-The bar graph shows whether more movies or TV shows with "Christmas" in the title were released in 2020, the year with the most releases with "Christmas" in the title on Netflix  From the graph we can see that 25 of the releases were movies and 5 were TV shows, indicating that Netflix produces way more movies than tv shows with the word "Christmas" in the title.
+The bar graph shows whether more movies or TV shows with "Christmas" in the title were released in 2020, the year with the most releases with "Christmas" in the title on Netflix. From the graph we can see that 25 of the releases were movies and 5 were TV shows, indicating that Netflix produces way more movies than tv shows with the word "Christmas" in the title.
 
 ```{r, echo=FALSE}
 christmas_words <- netflix_titles |> 
