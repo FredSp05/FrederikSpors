@@ -17,6 +17,8 @@ website:
            href: CO2_Emission.qmd
          - text: "Netflix Analysis"
            href: Netflix.qmd
+         - text: "Permutation Test"
+           href: Permutation.qmd
 
 format:
   html:
