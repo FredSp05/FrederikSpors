@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In this project, I examined how working remotely vs.&nbsp;working in-office affects the productivity of individuals. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become increasingly common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether remote work increases or decreases performance.</p>
+<p>In this project, I examined how working remotely vs.&nbsp;working in-office affects the productivity of individuals. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status, to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become increasingly common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether remote work increases or decreases performance.</p>
 <p>To understand the observed differences in productivity between the two groups, a box-plot was created to see the distribution of productivity for both remote and in-office workers:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -209,16 +209,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 10 × 5
    obs_ave_diff obs_med_diff perm_ave_diff perm_med_diff   rep
           &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;int&gt;
- 1         9.86            9         0.976           2       1
- 2         9.86            9        -0.908          -1       2
- 3         9.86            9         0.872           1       3
- 4         9.86            9        -0.112           0       4
- 5         9.86            9        -0.988          -1       5
- 6         9.86            9        -0.428          -2       6
- 7         9.86            9         0.456          -1       7
- 8         9.86            9        -0.356          -1       8
- 9         9.86            9         1.11            2       9
-10         9.86            9         0.332          -0.5    10</code></pre>
+ 1         9.86            9        0.180              1     1
+ 2         9.86            9       -0.128              0     2
+ 3         9.86            9       -0.680             -1     3
+ 4         9.86            9       -0.608              1     4
+ 5         9.86            9        0.128              0     5
+ 6         9.86            9        0.0921             1     6
+ 7         9.86            9       -1.12              -1     7
+ 8         9.86            9        0.352              0     8
+ 9         9.86            9        0.504             -1     9
+10         9.86            9        0.984              0    10</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance</p>
-<p>The data set used for this project comes from a Kaggle and was published by Akash Yadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</p>
+<p>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</p>
 
 
 <!-- -->
@@ -737,7 +737,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">    message: false</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>In this project, I examined how working remotely vs. working in-office affects the productivity of individuals. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become increasingly common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether remote work increases or decreases performance.</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>In this project, I examined how working remotely vs. working in-office affects the productivity of individuals. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status, to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become increasingly common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether remote work increases or decreases performance.</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>To understand the observed differences in productivity between the two groups, a box-plot was created to see the distribution of productivity for both remote and in-office workers:</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
@@ -832,7 +832,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance</span>
 <span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>The data set used for this project comes from a Kaggle and was published by Akash Yadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
