@@ -201,24 +201,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The box-plot shows that remote workers tend to have higher average productivity scores compared to in-office workers. To determine whether this observed difference is statistically significant, a permutation test using both the mean and the median was conducted. The null and alternative hypotheses are as follows:</p>
-<p>Null Hypothesis: There is no difference in productivity between remote and in-office workers.</p>
-<p>Alternative Hypothesis: There is a difference in productivity between remote and in-office workers.</p>
+<p>Null Hypothesis: Remote workers are not more productive than in-office workers.</p>
+<p>Alternative Hypothesis: Remote workers are more productive than in-office workers.</p>
 <p>The data for the type of work setting was shuffled 1000 times and the difference in means and medians was calculated to create a null distribution.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
    obs_ave_diff obs_med_diff perm_ave_diff perm_med_diff   rep
           &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;int&gt;
- 1         9.86            9        0.180              1     1
- 2         9.86            9       -0.128              0     2
- 3         9.86            9       -0.680             -1     3
- 4         9.86            9       -0.608              1     4
- 5         9.86            9        0.128              0     5
- 6         9.86            9        0.0921             1     6
- 7         9.86            9       -1.12              -1     7
- 8         9.86            9        0.352              0     8
- 9         9.86            9        0.504             -1     9
-10         9.86            9        0.984              0    10</code></pre>
+ 1         9.86            9        -0.864          -2       1
+ 2         9.86            9         0.812           1       2
+ 3         9.86            9        -0.336           0       3
+ 4         9.86            9        -0.284          -0.5     4
+ 5         9.86            9        -0.548          -1       5
+ 6         9.86            9         0.340           0.5     6
+ 7         9.86            9         0.104           0       7
+ 8         9.86            9         0.104           1       8
+ 9         9.86            9         0.308          -1       9
+10         9.86            9        -0.452          -1      10</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -235,8 +235,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>In the first histogram, each bar represents how often a certain mean difference in productivity (between remote and in-office workers) showed up when when the type of work was randomly shuffled. The red line shows the actual observed mean difference from the original data which was around 9.86. Most of the distribution is clustered around 0 and therefore, the likelihood of getting a difference as extreme as the observed one just by chance is extremely low. This suggests a statistically significant difference in mean productivity between remote and in-office workers.</p>
-<p>The second histogram displays the same idea, but using the median instead of the mean. The red line shows the observed median difference and the distribution represents the shuffled version. Also in this graph, the red line with a value of 9 is very far away from the random outcomes which are clustered around 0. Therefore, the median difference is also statistically significant.</p>
+<p>In the first histogram, each bar represents how often a particular mean difference in productivity (between remote and in-office workers) appeared when the work setting labels were randomly shuffled. This forms the null distribution, meaning what we would’ve expected if work setting had no effect. However, the red line shows the observed mean difference and was around 9.86. Since the null distribution is very clustered around 0, the likelihood of this result occurring is very low. This provides strong evidence that remote workers are significantly more productive than in-office workers and we reject the null hypothesis and accept the alternative hypothesis.</p>
+<p>The second histogram displays the same idea, but using the median instead of the mean. The red line shows the observed median difference and the distribution represents the shuffled, null hypothesis. The red line has a value of 9 and is very far away from the random outcomes which is also clustered around 0. Therefore, the median difference is also statistically significant and we reject the null hypothesis and accept the alternative hypothesis.</p>
+<p>To confirm these results, we have to find the p-values, shown in the table.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
@@ -245,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 1         0         0</code></pre>
 </div>
 </div>
-<p>Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance</p>
+<p>Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance.</p>
 <p>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</p>
 
 
@@ -763,9 +764,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>The box-plot shows that remote workers tend to have higher average productivity scores compared to in-office workers. To determine whether this observed difference is statistically significant, a permutation test using both the mean and the median was conducted. The null and alternative hypotheses are as follows:</span>
 <span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>Null Hypothesis: There is no difference in productivity between remote and in-office workers.</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>Null Hypothesis: Remote workers are not more productive than in-office workers.</span>
 <span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>Alternative Hypothesis: There is a difference in productivity between remote and in-office workers.</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>Alternative Hypothesis: Remote workers are more productive than in-office workers.</span>
 <span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>The data for the type of work setting was shuffled 1000 times and the difference in means and medians was calculated to create a null distribution.</span>
 <span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
@@ -821,18 +822,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="in">       x = "Permuted Median Difference",</span></span>
 <span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="in">       y = "Count")</span></span>
 <span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>In the first histogram, each bar represents how often a certain mean difference in productivity (between remote and in-office workers) showed up when when the type of work was randomly shuffled. The red line shows the actual observed mean difference from the original data which was around 9.86. Most of the distribution is clustered around 0 and therefore, the likelihood of getting a difference as extreme as the observed one just by chance is extremely low. This suggests a statistically significant difference in mean productivity between remote and in-office workers.</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>In the first histogram, each bar represents how often a particular mean difference in productivity (between remote and in-office workers) appeared when the work setting labels were randomly shuffled. This forms the null distribution, meaning what we would've expected if work setting had no effect. However, the red line shows the observed mean difference and was around 9.86. Since the null distribution is very clustered around 0, the likelihood of this result occurring is very low. This provides strong evidence that remote workers are significantly more productive than in-office workers and we reject the null hypothesis and accept the alternative hypothesis.</span>
 <span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>The second histogram displays the same idea, but using the median instead of the mean. The red line shows the observed median difference and the distribution represents the shuffled version. Also in this graph, the red line with a value of 9 is very far away from the random outcomes which are clustered around 0. Therefore, the median difference is also statistically significant.</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>The second histogram displays the same idea, but using the median instead of the mean. The red line shows the observed median difference and the distribution represents the shuffled, null hypothesis. The red line has a value of 9 and is very far away from the random outcomes which is also clustered around 0. Therefore, the median difference is also statistically significant and we reject the null hypothesis and accept the alternative hypothesis. </span>
 <span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="in">perm_stats |&gt; </span></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="in">  summarize(p_val_ave = mean(perm_ave_diff &gt; obs_ave_diff),</span></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="in">            p_val_med = mean(perm_med_diff &gt; obs_med_diff))</span></span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance</span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>To confirm these results, we have to find the p-values, shown in the table.</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="in">perm_stats |&gt; </span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">  summarize(p_val_ave = mean(perm_ave_diff &gt; obs_ave_diff),</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="in">            p_val_med = mean(perm_med_diff &gt; obs_med_diff))</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance.</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
