@@ -35,6 +35,7 @@ remote |>
        x = "Work Type",
        y = "Productivity Score")
 ```
+
 The box-plot shows that remote workers tend to have higher average productivity scores compared to in-office workers. To determine whether this observed difference is statistically significant, a permutation test using both the mean and the median was conducted. The null and alternative hypotheses are as follows:
 
 Null Hypothesis: Remote workers are not more productive than in-office workers.
@@ -95,9 +96,10 @@ perm_stats |>
        x = "Permuted Median Difference",
        y = "Count")
 ```
+
 In the first histogram, each bar represents how often a particular mean difference in productivity (between remote and in-office workers) appeared when the work setting labels were randomly shuffled. This forms the null distribution, meaning what we would've expected if work setting had no effect. However, the red line shows the observed mean difference and was around 9.86. Since the null distribution is very clustered around 0, the likelihood of this result occurring is very low. This provides strong evidence that remote workers are significantly more productive than in-office workers and we reject the null hypothesis and accept the alternative hypothesis.
 
-The second histogram displays the same idea, but using the median instead of the mean. The red line shows the observed median difference and the distribution represents the shuffled, null hypothesis. The red line has a value of 9 and is very far away from the random outcomes which is also clustered around 0. Therefore, the median difference is also statistically significant and we reject the null hypothesis and accept the alternative hypothesis. 
+The second histogram displays the same idea, but using the median instead of the mean. The red line shows the observed median difference and the distribution represents the shuffled, null hypothesis. The red line has a value of 9 and is very far away from the random outcomes which is also clustered around 0. Therefore, the median difference is also statistically significant and we reject the null hypothesis and accept the alternative hypothesis.
 
 To confirm these results, we have to find the p-values, shown in the table.
 
@@ -106,7 +108,7 @@ perm_stats |>
   summarize(p_val_ave = mean(perm_ave_diff > obs_ave_diff),
             p_val_med = mean(perm_med_diff > obs_med_diff))
 ```
+
 Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance.
 
 The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input
-

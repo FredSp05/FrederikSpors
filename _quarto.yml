@@ -19,6 +19,8 @@ website:
            href: Netflix.qmd
          - text: "Permutation Test"
            href: Permutation.qmd
+         - text: "Ethics in Data Science"
+           href: Ethics.qmd
 
 format:
   html:
