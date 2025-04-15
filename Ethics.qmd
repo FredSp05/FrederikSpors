@@ -11,7 +11,7 @@ OKCupid is a US-based networking/dating app used for online dating or making new
 
 **Method of Data Collection**
 
-The data was collected through web scraping of publicly viewable profiles on OkCupid. These profiles include self-reported information such as usernames, age, gender, sexual orientation, and personal questions, such as drug usage. The users could've answered some questions inaccurately, as some individuals might lie to present themselves more favorably on a dating site. Xiao and Ma argued: "People often answer these questions in ways they think will help them attract partners, not necessarily in ways that reflect their true beliefs or behaviors.” Additionally, some individuals might have left some questions blank which were too personal for them, making the dataset incomplete.
+The data was collected through web scraping of publicly available profiles on OkCupid, including self-reported information such as usernames, age, gender, sexual orientation, and personal questions, such as drug usage. Users may have answered some questions inaccurately, as some individuals might lie to present themselves more favorably on a dating site. Xiao and Ma argued: "People often answer these questions in ways they think will help them attract partners, not necessarily in ways that reflect their true beliefs or behaviors.” Additionally, some individuals might have left some questions blank, making the dataset incomplete.
 
 **Users Consent for using their Data**
 
