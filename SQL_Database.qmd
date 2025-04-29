@@ -1,0 +1,151 @@
+---
+title: "Comparing Traffic Violations in Madison (WI), Mesa (AZ), and Aurora (CO)"
+format:
+  html:
+    code-tools:
+      source: true
+      toggle: false
+      caption: "Code"
+    toc: true
+    number-sections: true
+bibliography: references.bib
+citeproc: true
+execute:
+  warning: false
+  message: false
+---
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(stringr)
+library(RMariaDB)
+library(DBI)
+```
+
+```{r, echo=FALSE}
+con_traffic <- DBI::dbConnect(
+  RMariaDB::MariaDB(),
+  dbname = "traffic",
+  host = Sys.getenv("TRAFFIC_HOST"),
+  user = Sys.getenv("TRAFFIC_USER"),
+  password = Sys.getenv("TRAFFIC_PWD")
+)
+```
+
+**Introduction**
+
+This project explores traffic stop data from three different US cities: Madison (WI), Mesa (AZ), and Aurora (CO), using Stanford Open Policing Project published by @pierson2020racial. The data for Madison was sourced from 2007-09-28 to 2020-06-16, for Mesa from 2014-01-01 to 2019-09-23 and for Aurora from 2012-01-01 to 2020-07-31. All three cities are considered mid-sized, with a population ranging between approx. 250,000 and 500,000 [@uscensus2023cities]. The objective of this project is to compare the age distribution of individuals stopped in each city and to analyze the most common traffic violations. This can give us insights whether differences in age demographics might contribute to variations in enforcement patterns.
+
+First, the traffic stop data was organized into five age brackets >18, 18–30, 31–45, 46–60, and 60+ to compare the age distributions of traffic stops in Madison, Mesa, and Aurora. 
+```{sql, connection=con_traffic, output.var="age_brackets_states", echo=FALSE}
+SELECT 
+  state,
+  CASE 
+    WHEN subject_age < 18 THEN '<18'
+    WHEN subject_age BETWEEN 18 AND 30 THEN '18-30'
+    WHEN subject_age BETWEEN 31 AND 45 THEN '31-45'
+    WHEN subject_age BETWEEN 46 AND 65 THEN '46-60'
+    ELSE '60+'
+  END AS age_group,
+  COUNT(*) AS stop_count
+FROM (
+  SELECT 'Madison' AS state, subject_age
+  FROM wi_madison_2023_01_26
+  WHERE subject_age IS NOT NULL
+  
+  UNION ALL
+  
+  SELECT 'Mesa' AS state, subject_age
+  FROM az_mesa_2023_01_26
+  WHERE subject_age IS NOT NULL
+  
+  UNION ALL
+  
+  SELECT 'Aurora' AS state, subject_age
+  FROM co_aurora_2023_01_26
+  WHERE subject_age IS NOT NULL) AS combined
+GROUP BY state, age_group
+ORDER BY state, age_group;
+```
+
+```{r, echo=FALSE}
+age_brackets_states <- age_brackets_states |>
+  mutate(stop_count = as.numeric(stop_count))
+
+ggplot(age_brackets_states, aes(
+  x = age_group, 
+  y = stop_count, 
+  fill = factor(state, levels = c("Aurora", "Mesa", "Madison")))) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Traffic Stops by Age Groups in Madison (WI), Mesa (AZ), and Aurora (CO)",
+    x = "Age Group",
+    y = "Number of Stops",
+    fill = "City"
+  )
+```
+The bar graph shows that in all three cities, the 18–30 and 31–45 age groups have the highest number of traffic stops. Aurora has the highest overall number of stops, particularly among drivers aged 18–30 and 31–45. For the older age groups (46–60 and 60+), however, Mesa has more number of stops than Aurora. Overall, Mesa a trend similar to Aurora, but with relatively more stops among older drivers. Madison consistently has significantly fewer stops across all age groups, likely due to its smaller population size and lower overall traffic volume.
+The relatively higher number of stops for individuals aged 18–30 can be explained by younger drivers being more risky and having less driving experience. This could potentially lead to more speeding violations, traffic infractions, or insurance-related issues. As the distribution of number of stops for the ages in somewhat similar, the types of stops for each city will be investigated in the next section to see whether specific types of violations are common across the three cities.
+
+Below are three tables listing the number of stops associated with their most frequent traffic violations for each city. Due to differences in the sizes of the cities, the varying time spans of data collected, and their respective total stop counts, a threshold was applied to focus on the most frequent violations in each city. For Madison, only violations with more than 9,000 stops were included, for Mesa more than 3,000 stops, and for Aurora more than 5,000 stops. This was done to show approximately the top 10 violations in each city. This adjustment allows us to analyze whether there are any patterns or similarities among the most common types of traffic violations across the three cities.
+
+```{sql, connection=con_traffic, output.var="madison_violations", echo=FALSE}
+SELECT 
+  violation,
+  COUNT(*) AS violation_count
+FROM wi_madison_2023_01_26
+WHERE violation IS NOT NULL
+GROUP BY violation
+HAVING violation_count > 9000
+ORDER BY violation_count DESC;
+```
+
+```{sql, connection=con_traffic, output.var="mesa_violations", echo=FALSE}
+SELECT 
+  violation,
+  COUNT(*) AS violation_count
+FROM az_mesa_2023_01_26
+WHERE violation IS NOT NULL
+GROUP BY violation
+HAVING violation_count > 3000
+ORDER BY violation_count DESC;
+```
+
+```{sql, connection=con_traffic, output.var="aurora_violations", echo=FALSE}
+SELECT 
+  violation,
+  COUNT(*) AS violation_count
+FROM co_aurora_2023_01_26
+WHERE violation IS NOT NULL
+GROUP BY violation
+HAVING violation_count > 5000
+ORDER BY violation_count DESC;
+```
+
+**Type of Traffic Violations in Madison, WI**
+```{r, echo=FALSE}
+madison_violations
+```
+In Madison, the most common traffic violations involve speeding, wrong or missing documentation and _. The top violation was "Exceeding Speed Zones (1–10 MPH)" with over 33,000 stops, followed by "Operating a Motor Vehicle Without Proof of Insurance" and "Exceeding Speed Zones (11–15 MPH)." Other frequent violations included failing to wear a seatbelt or driving after license suspension. This shows that that both compliance-related and behavioral violations are very common in Madison.
+
+**Type of Traffic Violations in Mesa, AZ**
+```{r, echo=FALSE}
+mesa_violations
+```
+In Mesa, the leading violation by a large margin was "Speed Not Reasonable and Prudent/Failure to Control Speed to Avoid a Collision," with nearly 58,500 stops. Other traffic stops included running a red light, failure to stop for stop signs or not using two headlights at night. There is a much wider range of violations suggesting a more diverse set of enforcement priorities or differences in driving behaviors.
+
+**Type of Traffic Violations in Aurora, CO**
+```{r, echo=FALSE}
+aurora_violations
+```
+In Aurora, the most common violation was "Speeding (10–19 Over)" and "Speeding (10-14 Over 65 Limit)." Other common violations included "Failure to Present Evidence of Insurance Upon Request" and disregarding stop signs or not using a seat belt. There is a high proportion of speeding violations suggesting that the city places strong emphasis on speed enforcement. However, the elevated number of younger drivers, as observed in the first graph, may explain why there are so many speeding-related violations.
+
+**Conclusion**
+
+Across all three cities, speeding-related violations were the most common violations, however, the way these violations are classified varies. Madison categories speeding by specific speed brackets over the limit such as "Exceeding Speed Zones (1–10 MPH)" or "11–15 MPH." In contrast, Aurora and Mesa use broader or differently phrased categories. Mesa includes generalized terms like “Speed Not Reasonable and Prudent/Failure to Control Speed to Avoid a Collision,” while Aurora uses slightly more specific but still very broad grouped categories such as “Speeding (10–19 Over).” This illustrates how speeding violations are categorized and enforced differently across cities and states.
+The findings align with the observation that individuals aged 18-30 and 31-45 account for the majority of traffic stops. These age groups are generally associated with riskier driving, such as speeding, and failure to carry proper documentation [@CDC_TeenDrivers_RiskFactors]. In Aurora, the high proportion of traffic stops involving younger individuals appears to have an effect on the proportion of speeding violations which are higher, particularly at higher speeds. For example, Aurora's top 10 violations include speeding of more than 20 MPH over the limit while this does not appear among the top 10 in Madison or Mesa. This suggests that either drivers in Aurora drive riskier, due to more younger individuals being stopped, or that enforcement emphasizes higher-speed infractions.
+Overall, while the types of traffic violations across the three cities are relatively consistent with regarding speeding and documentation-related offenses, the way these infractions are defined and categorized varies. This is probably due to different local enforcement, reporting standards or maybe riskier driving behaviors. 
+

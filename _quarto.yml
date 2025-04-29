@@ -21,7 +21,8 @@ website:
            href: Permutation.qmd
          - text: "Ethics in Data Science"
            href: Ethics.qmd
-
+         - text: "SQL Database"
+           href: SQL_Database.qmd
 format:
   html:
     theme: cosmo
