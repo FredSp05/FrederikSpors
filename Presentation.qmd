@@ -1,0 +1,223 @@
+---
+title: "Final Presentation"
+author: "Frederik Spors"
+subtitle: "May 13th 2025"
+format:
+  revealjs:
+    scrollable: true
+    slide-number: true
+    show-slide-number: all
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Project 1 - Data Visualization
+
+::: panel-tabset
+
+### Overview
+
+- Two TidyTuesday datasets
+
+- Data on the total number of flights per month (2010-2018)
+
+- Data on the change in CO2 emission
+
+### Flight per Month
+
+```{r, echo = FALSE}
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+monthly_passengers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-12-24/monthly_passengers.csv')
+
+monthly_totals <- monthly_passengers |>
+  group_by(Month) |>
+  summarise(total_flights = sum(Total, na.rm = TRUE)) |>
+  arrange(Month)
+```
+
+```{r}
+ggplot(monthly_totals, aes(x = Month, y = total_flights, group = 1)) +
+  geom_line(color = "red") + 
+  geom_point(alpha = 0.2) +
+  labs(title = "Total Number of Flights per Month",
+       x = "Month",
+       y = "Total Flights (in thousands)") +
+  theme_minimal() +
+  scale_x_continuous(breaks = 1:12, labels = 1:12)
+```
+
+- Number of flights peak in the summer
+
+- Clear seasonality trend in air travel
+
+### CO2 Emission
+
+```{r, echo = FALSE}
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+emissions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-05-21/emissions.csv')
+
+annual_emissions <- emissions |>
+  group_by(year) |>
+  summarise(total_emissions = sum(total_emissions_MtCO2e, na.rm = TRUE))
+```
+
+```{r}
+ggplot(annual_emissions, aes(x = year, y = total_emissions)) +
+  geom_line(color = "blue", size = 1) +
+  geom_point(alpha = 0.2) +
+  labs(title = "Total Emissions Over The Years",
+       x = "Year",
+       y = "Total Emissions (MtCO2e)") +
+  theme_minimal()
+```
+
+- Global emissions have increased drastically since 1950
+
+- Driven by industrial and fossil fuel expansion
+
+:::
+
+## Comparing Traffic Violations using SQL
+
+:::panel-tabset
+### Overview
+- Grouped individuals into five age brackets to compare stop distributions in Madison (WI), Mesa (AZ) and Aurora (CO)
+- Investigated most common traffic violations per city to assess enforcement patterns and demographic trends
+- Applied different violation-count thresholds to highlight top violations in each city, accounting for differences in population and data size
+
+```{r, echo=FALSE}
+con_traffic <- DBI::dbConnect(
+  RMariaDB::MariaDB(),
+  dbname = "traffic",
+  host = Sys.getenv("TRAFFIC_HOST"),
+  user = Sys.getenv("TRAFFIC_USER"),
+  password = Sys.getenv("TRAFFIC_PWD")
+)
+```
+
+### Age Distribution
+
+
+```{sql, connection=con_traffic, output.var="age_brackets_states"}
+SELECT 
+  state,
+  CASE 
+    WHEN subject_age < 18 THEN '<18'
+    WHEN subject_age BETWEEN 18 AND 30 THEN '18-30'
+    WHEN subject_age BETWEEN 31 AND 45 THEN '31-45'
+    WHEN subject_age BETWEEN 46 AND 65 THEN '46-60'
+    ELSE '60+'
+  END AS age_group,
+  COUNT(*) AS stop_count
+FROM (
+  SELECT 'Madison' AS state, subject_age
+  FROM wi_madison_2023_01_26
+  WHERE subject_age IS NOT NULL
+  
+  UNION ALL
+  
+  SELECT 'Mesa' AS state, subject_age
+  FROM az_mesa_2023_01_26
+  WHERE subject_age IS NOT NULL
+  
+  UNION ALL
+  
+  SELECT 'Aurora' AS state, subject_age
+  FROM co_aurora_2023_01_26
+  WHERE subject_age IS NOT NULL) AS combined
+GROUP BY state, age_group
+ORDER BY state, age_group;
+```
+
+```{r, echo=FALSE}
+age_brackets_states <- age_brackets_states |>
+  mutate(stop_count = as.numeric(stop_count))
+
+ggplot(age_brackets_states, aes(
+  x = age_group, 
+  y = stop_count, 
+  fill = factor(state, levels = c("Aurora", "Mesa", "Madison")))) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Traffic Stops by Age Groups in Madison (WI), Mesa (AZ), and Aurora (CO)",
+    x = "Age Group",
+    y = "Number of Stops",
+    fill = "City"
+  )
+```
+
+
+
+- Ages **18–30** and **31–45** had the highest number of stops in all three cities  
+- **Aurora** had the most stops overall, especially among younger drivers  
+- **Madison** had fewer stops across all age groups, likely due to lower traffic volume
+
+### Frequency of Stops
+
+**Type of Traffic Violations in Madison, WI**
+```{sql, connection=con_traffic, output.var="madison_violations", echo=FALSE}
+SELECT 
+  violation,
+  COUNT(*) AS violation_count
+FROM wi_madison_2023_01_26
+WHERE violation IS NOT NULL
+GROUP BY violation
+HAVING violation_count > 9000
+ORDER BY violation_count DESC;
+```
+```{r, echo=FALSE}
+madison_violations
+```
+<br>
+**Type of Traffic Violations in Mesa, AZ**
+```{sql, connection=con_traffic, output.var="mesa_violations", echo=FALSE}
+SELECT 
+  violation,
+  COUNT(*) AS violation_count
+FROM az_mesa_2023_01_26
+WHERE violation IS NOT NULL
+GROUP BY violation
+HAVING violation_count > 3000
+ORDER BY violation_count DESC;
+```
+```{r, echo=FALSE}
+mesa_violations
+```
+<br>
+**Type of Traffic Violations in Aurora, CO**
+```{sql, connection=con_traffic, output.var="aurora_violations", echo=FALSE}
+SELECT 
+  violation,
+  COUNT(*) AS violation_count
+FROM co_aurora_2023_01_26
+WHERE violation IS NOT NULL
+GROUP BY violation
+HAVING violation_count > 5000
+ORDER BY violation_count DESC;
+```
+```{r, echo=FALSE}
+aurora_violations
+```
+
+<br>
+**Summary**
+
+- Speeding is the most frequent violation in all three cities
+- Enforcement and violation categories differ significantly
+- Younger drivers (18–45) dominate traffic stops, aligning with riskier behavior trends
+:::
+
+::: {.center .thank-you-slide}
+
+# <span style="font-size: 3em; color: #007BFF;">Thank You!</span>
+
+:::

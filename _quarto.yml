@@ -23,6 +23,8 @@ website:
            href: Ethics.qmd
          - text: "SQL Database"
            href: SQL_Database.qmd
+      - href: presentation.html
+        text: "Final Presentation"
 format:
   html:
     theme: cosmo
