@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In this project, I examined how working remotely vs.&nbsp;working in-office affects the productivity of individuals. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status, to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become increasingly common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether remote work increases or decreases performance.</p>
+<p>In this project, I examined how working remotely vs.&nbsp;working in-office affects the productivity of individuals, using a fictional dataset created for demonstration purposes. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status, to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become more common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether perfomance for remote work is higher or lower.</p>
 <p>To understand the observed differences in productivity between the two groups, a box-plot was created to see the distribution of productivity for both remote and in-office workers:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -221,16 +221,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 10 × 5
    obs_ave_diff obs_med_diff perm_ave_diff perm_med_diff   rep
           &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;int&gt;
- 1         9.86            9         0.492           0       1
- 2         9.86            9         0.980           1.5     2
- 3         9.86            9        -0.616          -1       3
- 4         9.86            9        -0.308          -0.5     4
- 5         9.86            9        -0.256           0.5     5
- 6         9.86            9        -0.744          -2       6
- 7         9.86            9         0.232           0       7
- 8         9.86            9         1.13            2       8
- 9         9.86            9        -0.756          -1       9
-10         9.86            9        -1.32           -3      10</code></pre>
+ 1         9.86            9       -0.344              1     1
+ 2         9.86            9        0.628              2     2
+ 3         9.86            9       -0.732              1     3
+ 4         9.86            9        0.460              1     4
+ 5         9.86            9       -0.328              0     5
+ 6         9.86            9       -0.384             -1     6
+ 7         9.86            9       -0.612             -1     7
+ 8         9.86            9       -0.364             -1     8
+ 9         9.86            9       -0.0319            -1     9
+10         9.86            9       -0.176              1    10</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance.</p>
-<p>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</p>
+<p>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains fictional survey-based data comparing productivity between remote and in-office workers: <a href="https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input" class="uri">https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</a></p>
 
 
 <!-- -->
@@ -750,7 +750,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">    message: false</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>In this project, I examined how working remotely vs. working in-office affects the productivity of individuals. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status, to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become increasingly common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether remote work increases or decreases performance.</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>In this project, I examined how working remotely vs. working in-office affects the productivity of individuals, using a fictional dataset created for demonstration purposes. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status, to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become more common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether perfomance for remote work is higher or lower.</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>To understand the observed differences in productivity between the two groups, a box-plot was created to see the distribution of productivity for both remote and in-office workers:</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
@@ -850,7 +850,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance.</span>
 <span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains fictional survey-based data comparing productivity between remote and in-office workers: <span class="ot">&lt;https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

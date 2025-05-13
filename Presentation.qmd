@@ -42,7 +42,7 @@ monthly_totals <- monthly_passengers |>
 ```
 
 ```{r}
-ggplot(monthly_totals, aes(x = Month, y = total_flights, group = 1)) +
+ggplot(monthly_totals, aes(x = Month, y = total_flights)) +
   geom_line(color = "red") + 
   geom_point(alpha = 0.2) +
   labs(title = "Total Number of Flights per Month",
@@ -157,9 +157,9 @@ ggplot(age_brackets_states, aes(
 
 
 
-- Ages **18–30** and **31–45** had the highest number of stops in all three cities  
-- **Aurora** had the most stops overall, especially among younger drivers  
-- **Madison** had fewer stops across all age groups, likely due to lower traffic volume
+- Ages 18–30 and 31–45 had the highest number of stops in all three cities  
+- Aurora had the most stops overall, especially among younger drivers  
+- Madison had fewer stops across all age groups, likely due to lower traffic volume or less policing
 
 ### Frequency of Stops
 

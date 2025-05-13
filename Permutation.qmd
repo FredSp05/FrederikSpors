@@ -11,7 +11,7 @@ execute:
     message: false
 ---
 
-In this project, I examined how working remotely vs. working in-office affects the productivity of individuals. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status, to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become increasingly common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether remote work increases or decreases performance.
+In this project, I examined how working remotely vs. working in-office affects the productivity of individuals, using a fictional dataset created for demonstration purposes. The two variables analyzed are work setting (remote or in-office) and productivity, measured on a scale from 0 to 100 and adjusted based on employment status, to reflect each individual’s productivity level. Since the COVID-19 pandemic, remote work has become more common, and it has started the debate about its impact on employee performance and overall productivity. By analyzing productivity across work settings, we can investigate whether perfomance for remote work is higher or lower.
 
 To understand the observed differences in productivity between the two groups, a box-plot was created to see the distribution of productivity for both remote and in-office workers:
 
@@ -111,4 +111,4 @@ perm_stats |>
 
 Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance.
 
-The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains survey-based data comparing productivity between remote and in-office workers: https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input
+The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains fictional survey-based data comparing productivity between remote and in-office workers: <https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input>

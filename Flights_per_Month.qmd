@@ -1,5 +1,5 @@
 ---
-title: "Flights_per_Month"
+title: "Flights per Month (2010-2018)"
 format: html
 execute:
   warning: false
@@ -29,6 +29,7 @@ ggplot(monthly_totals, aes(x = Month, y = total_flights, group = 1)) +
 
 ```
 
-This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from WorldPop.
+This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from Eurocontrol.
 
-Source: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2022/2022-07-12/readme.md>
+ANS Performance. (2025). European Air Navigation Performance Review Reports. Original Source: <https://ansperformance.eu/data/>
+Accessed via TidyTuesday GitHub repository: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2022/2022-07-12/readme.md>

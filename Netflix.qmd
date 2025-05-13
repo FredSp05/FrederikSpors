@@ -11,6 +11,8 @@ execute:
     message: false
 ---
 
+This project uses a dataset of Netflix titles published by Shivam Bansal and originally published on Kaggle. The dataset contains information such as the title, type (movie or TV show),and the date each title was added to Netflix. This will be used to explore trends in titles that contain the word "Christmas" over time. The dataset was accessed via the TidyTuesday GitHub repository and covers content available on Netflix up to 2021.
+
 ```{r, echo=FALSE}
 library(ggplot2)
 library(dplyr)
@@ -37,13 +39,13 @@ ggplot(love_titles, aes(x = year_added, y = count)) +
 The graph shows a steady increase in the number of Netflix titles containing "Christmas" from 2013 and peaking in 2020. However, then there is a massive drop to nearly zero in 2021, likely due to filming delays caused by COVID-19.
 
 ```{r, echo=FALSE}
-love_2019 <- netflix_titles |>
+christmas_2019 <- netflix_titles |>
   mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |>
   filter(year_added == 2020) |>
   filter(str_detect(title, "Christmas")) |>
   count(type)
 
-ggplot(love_2019, aes(x = type, y = n, fill = type)) +
+ggplot(christmas_2019, aes(x = type, y = n, fill = type)) +
   geom_bar(stat = "identity") +
   labs(title = "Netflix Movies vs TV Shows Containing 'Christmas' Added in 2019", 
        x = "Type", y = "Count")
@@ -51,9 +53,26 @@ ggplot(love_2019, aes(x = type, y = n, fill = type)) +
 
 The bar graph shows whether more movies or TV shows with "Christmas" in the title were released in 2020, the year with the most releases with "Christmas" in the title on Netflix. From the graph we can see that 25 of the releases were movies and 5 were TV shows, indicating that Netflix released 5x more movies than tv shows with the word "Christmas" in the title in that year.
 
+However, I also wanted to see the proportion of movies containing "Christmas" over the years. Therefore, I calculated the proportion of all titles containing "Christmas" in the title released over the last years by dividing it by the total number of new titles added to Netflix.
+```{r, echo=FALSE}
+christmas_proportions <- netflix_titles |>
+  mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |>
+  group_by(year_added) |>
+  summarise(total_titles = n(), christmas_titles = sum(str_detect(title, "Christmas"))) |>
+  mutate(proportion = christmas_titles / total_titles)
+
+ggplot(christmas_proportions, aes(x = year_added, y = proportion)) +
+  geom_line(color = "red") +
+  geom_point() +
+ scale_x_continuous(limits = c(2011, 2021), breaks = seq(2011, 2021, 1)) +
+  labs(title = "Proportion of Netflix Titles Containing 'Christmas' Over Time",
+       x = "Year", y = "Proportion")
+```
+Before 2013, there were no Netflix titles containing the word "Christmas," as shown in the previous graph. Although the total number of titles containing "Christmas" in 2013 was relatively low, that year had the highest proportion of "Christmas" titles relative to total releases. This shows that Netflix’s overall content volume has increased significantly in past years and Christmas themed titles made up the largest share of new releases in 2013 compared to any other year.
+
 ```{r, echo=FALSE}
 christmas_words <- netflix_titles |> 
-  mutate(after_christmas = str_extract(description, "(?<=Christmas\\s)\\w+")) |>
+  mutate(after_christmas = str_to_lower(str_extract(title, "(?<=Christmas\\s)\\w+"))) |>
   filter(!is.na(after_christmas)) |>
   group_by(after_christmas) |>
   summarise(n = n()) |> 
@@ -63,6 +82,19 @@ christmas_words <- netflix_titles |>
 christmas_words
 ```
 
-The table presents the top 10 most common words after "Christmas" in Netflix titles. The most common word is "Eve", appearing 10 times. This is followed by "special", "to", and "with", each occurring 3 times.
+The table presents the top 10 most common words after "Christmas" in Netflix titles. The most common word is "Special" and "with" both appearing 4 times. This is followed by "prince" occurring 3 times. The words "chronicles", "in", "wedding" and "wish" each appear two times.
 
-Sources: https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md https://www.kaggle.com/datasets/shivamb/netflix-shows
+Since "with" and "special" are the most common words that follow "Christmas," I wanted to see the titles that contain the phrase "Christmas with" to see what words or phrases come after those titles.
+```{r, echo = FALSE}
+christmas_with_phrase <- netflix_titles |> 
+  filter(str_detect(str_to_lower(title), "christmas with")) |> 
+  mutate(after_with = str_to_lower(str_extract(title, "(?i)(?<=christmas with\\s).+"))) |> 
+  select(after_with)
+
+christmas_with_phrase
+```
+
+The four titles containing the phrase "Christmas with" are shown in the table above. The words that follow "Christmas with" in are: "a Prince," "a View," "the Kranks," and "my Father."
+
+Bansal, S. (2021). Netflix Movies and TV Shows Dataset. Kaggle. Original Source: <https://www.kaggle.com/datasets/shivamb/netflix-shows>
+Accessed via TidyTuesday GitHub repository: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md>

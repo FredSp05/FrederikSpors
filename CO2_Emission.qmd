@@ -1,5 +1,5 @@
 ---
-title: "CO2_Emission"
+title: "CO2 Emission over the Years"
 format: html
 execute:
   warning: false
@@ -28,4 +28,5 @@ ggplot(annual_emissions, aes(x = year, y = total_emissions)) +
 
 This graph shows the change in total CO2 emissions since measurements started. The TidyTuesday used is from 2024-05-21 and the data set comes from Carbon Majors.
 
-Source: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-05-21/readme.md>
+Climate Accountability Institute. (2023). Carbon Majors Database. Original source: <https://carbonmajors.org/>
+Accessed via TidyTuesday GitHub repository: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-05-21/readme.md>
