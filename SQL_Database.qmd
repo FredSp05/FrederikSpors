@@ -67,11 +67,12 @@ FROM (
   SELECT 'Aurora' AS state, subject_age
   FROM co_aurora_2023_01_26
   WHERE subject_age IS NOT NULL) AS combined
-GROUP BY state, age_group
-ORDER BY state, age_group;
+GROUP BY state, age_group;
 ```
 
 ```{r, echo=FALSE}
+#| fig-alt: "Bar chart showing the number of traffic stops by age group in Madison, Mesa, and Aurora. The 18–30 group had the highest number of stops in all three cities. Aurora has the most traffic stops for nearly all age brackets. Madison had the fewest stops overall, especially in older age groups."
+
 age_brackets_states <- age_brackets_states |>
   mutate(stop_count = as.numeric(stop_count))
 
@@ -127,18 +128,24 @@ ORDER BY violation_count DESC;
 
 **Type of Traffic Violations in Madison, WI**
 ```{r, echo=FALSE}
+#| fig-alt: "Table showing the most common traffic violations in Madison, WI. The top violation is 'Exceeding Speed Zones (1–10 MPH)', followed by insurance-related offenses and various speeding and signal violations."
+
 madison_violations
 ```
 In Madison, the most common traffic violations involve speeding and wrong or missing documentation. The top violation was "Exceeding Speed Zones (1–10 MPH)" with over 33,000 stops, followed by "Operating a Motor Vehicle Without Proof of Insurance" and "Exceeding Speed Zones (11–15 MPH)." Other frequent violations included failing to wear a seatbelt or driving after license suspension. This shows that that both compliance-related and behavioral violations are very common in Madison.
 
 **Type of Traffic Violations in Mesa, AZ**
 ```{r, echo=FALSE}
+#| fig-alt: "Table showing the most common traffic violations in Mesa, AZ. The top violations are 'Speed Not R&P/FTC Speed to Avoid a Collision', 'Expired Registration', and 'No Proof of Insurance'."
+
 mesa_violations
 ```
 In Mesa, the leading violation by a large margin was "Speed Not Reasonable and Prudent/Failure to Control Speed to Avoid a Collision," with nearly 58,500 stops. Other traffic stops included running a red light, failure to stop for stop signs or not using two headlights at night. There is a much wider range of violations suggesting a more diverse set of enforcement priorities or differences in driving behaviors.
 
 **Type of Traffic Violations in Aurora, CO**
 ```{r, echo=FALSE}
+#| fig-alt: "Table showing the most frequent traffic violations in Aurora, CO. The most common violations include speeding, failure to present evidence of insurance, seat belt violations, and 'careless' driving."
+
 aurora_violations
 ```
 In Aurora, the most common violation was "Speeding (10–19 Over)" and "Speeding (10-14 Over 65 Limit)." Other common violations included "Failure to Present Evidence of Insurance Upon Request" and disregarding stop signs or not using a seat belt. There is a high proportion of speeding violations suggesting that the city places strong emphasis on speed enforcement. However, the elevated number of younger drivers, as observed in the first graph, may explain why there are so many speeding-related violations.

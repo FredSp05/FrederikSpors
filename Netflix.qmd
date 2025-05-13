@@ -14,6 +14,8 @@ execute:
 This project uses a dataset of Netflix titles published by Shivam Bansal and originally published on Kaggle. The dataset contains information such as the title, type (movie or TV show),and the date each title was added to Netflix. This will be used to explore trends in titles that contain the word "Christmas" over time. The dataset was accessed via the TidyTuesday GitHub repository and covers content available on Netflix up to 2021.
 
 ```{r, echo=FALSE}
+#| fig-alt: "Line graph showing the number of Netflix titles containing the word 'Christmas' released each year. The first title containing 'Christmas' was in 2013 and then there was a steady increase from 2015, peaking at 30 titles in 2020, followed by a sharp drop in 2021, probably due to COVID-19 delays."
+
 library(ggplot2)
 library(dplyr)
 library(readr)
@@ -39,6 +41,8 @@ ggplot(love_titles, aes(x = year_added, y = count)) +
 The graph shows a steady increase in the number of Netflix titles containing "Christmas" from 2013 and peaking in 2020. However, then there is a massive drop to nearly zero in 2021, likely due to filming delays caused by COVID-19.
 
 ```{r, echo=FALSE}
+#| fig-alt: "Bar chart comparing the number of Netflix movies and TV shows containing the word 'Christmas' that were added in 2019, the year with the most titles containing 'Christmas' released. Around 25 were movies, while only about 5 were TV shows."
+
 christmas_2019 <- netflix_titles |>
   mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |>
   filter(year_added == 2020) |>
@@ -55,6 +59,8 @@ The bar graph shows whether more movies or TV shows with "Christmas" in the titl
 
 However, I also wanted to see the proportion of movies containing "Christmas" over the years. Therefore, I calculated the proportion of all titles containing "Christmas" in the title released over the last years by dividing it by the total number of new titles added to Netflix.
 ```{r, echo=FALSE}
+#| fig-alt: "Line graph showing the proportion of Netflix released titles containing the word 'Christmas' over the years. There is a very drastic increase from 0% to around 0.9% in 2013, followed by a significant drop and relatively stable low proportions, with a slight increase again in 2020."
+
 christmas_proportions <- netflix_titles |>
   mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |>
   group_by(year_added) |>
@@ -71,6 +77,8 @@ ggplot(christmas_proportions, aes(x = year_added, y = proportion)) +
 Before 2013, there were no Netflix titles containing the word "Christmas," as shown in the previous graph. Although the total number of titles containing "Christmas" in 2013 was relatively low, that year had the highest proportion of "Christmas" titles relative to total releases. This shows that Netflix’s overall content volume has increased significantly in past years and Christmas themed titles made up the largest share of new releases in 2013 compared to any other year.
 
 ```{r, echo=FALSE}
+#| fig-alt: "Table showing the 10 most common words that appear directly after 'Christmas' in Netflix titles. The most frequent words are 'special' and 'with' each appering 4 times, followed by 'prince', appearing 3 times, and words like 'chronicles', 'wedding', and 'wish' each appearing twice."
+
 christmas_words <- netflix_titles |> 
   mutate(after_christmas = str_to_lower(str_extract(title, "(?<=Christmas\\s)\\w+"))) |>
   filter(!is.na(after_christmas)) |>
@@ -86,6 +94,8 @@ The table presents the top 10 most common words after "Christmas" in Netflix tit
 
 Since "with" and "special" are the most common words that follow "Christmas," I wanted to see the titles that contain the phrase "Christmas with" to see what words or phrases come after those titles.
 ```{r, echo = FALSE}
+#| fig-alt: "Table showing phrases/words that follow 'Christmas with' in Netflix titles. The four examples are 'a prince', 'a view', 'the kranks', and 'my father'."
+
 christmas_with_phrase <- netflix_titles |> 
   filter(str_detect(str_to_lower(title), "christmas with")) |> 
   mutate(after_with = str_to_lower(str_extract(title, "(?i)(?<=christmas with\\s).+"))) |> 

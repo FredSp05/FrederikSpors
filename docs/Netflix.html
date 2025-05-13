@@ -202,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Netflix_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Netflix_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" alt="Line graph showing the number of Netflix titles containing the word 'Christmas' released each year. The first title containing 'Christmas' was in 2013 and then there was a steady increase from 2015, peaking at 30 titles in 2020, followed by a sharp drop in 2021, probably due to COVID-19 delays." width="672"></p>
 </figure>
 </div>
 </div>
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Netflix_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Netflix_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" alt="Bar chart comparing the number of Netflix movies and TV shows containing the word 'Christmas' that were added in 2019, the year with the most titles containing 'Christmas' released. Around 25 were movies, while only about 5 were TV shows." width="672"></p>
 </figure>
 </div>
 </div>
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Netflix_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Netflix_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" alt="Line graph showing the proportion of Netflix released titles containing the word 'Christmas' over the years. There is a very drastic increase from 0% to around 0.9% in 2013, followed by a significant drop and relatively stable low proportions, with a slight increase again in 2020." width="672"></p>
 </figure>
 </div>
 </div>
@@ -754,90 +754,100 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>This project uses a dataset of Netflix titles published by Shivam Bansal and originally published on Kaggle. The dataset contains information such as the title, type (movie or TV show),and the date each title was added to Netflix. This will be used to explore trends in titles that contain the word "Christmas" over time. The dataset was accessed via the TidyTuesday GitHub repository and covers content available on Netflix up to 2021.</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">library(readr)</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="in">library(stringr)</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="in">netflix_titles &lt;- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-04-20/netflix_titles.csv')</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-alt: "Line graph showing the number of Netflix titles containing the word 'Christmas' released each year. The first title containing 'Christmas' was in 2013 and then there was a steady increase from 2015, peaking at 30 titles in 2020, followed by a sharp drop in 2021, probably due to COVID-19 delays."</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="in">library(readr)</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="in">library(stringr)</span></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">love_titles &lt;- netflix_titles |&gt;</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(str_detect(title, "Christmas")) |&gt;</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |&gt;</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(year_added) |&gt;</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(count = n())</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(love_titles, aes(x = year_added, y = count)) +</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_line(color = "red") +</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point() +</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_x_continuous(breaks = seq(2000, 2021, by = 1)) +</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(title = "Netflix Titles Containing 'Christmas' Released Over the Years",</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="in">       x = "Year", y = "Number of Titles")</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>The graph shows a steady increase in the number of Netflix titles containing "Christmas" from 2013 and peaking in 2020. However, then there is a massive drop to nearly zero in 2021, likely due to filming delays caused by COVID-19.</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">netflix_titles &lt;- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-04-20/netflix_titles.csv')</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">love_titles &lt;- netflix_titles |&gt;</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(str_detect(title, "Christmas")) |&gt;</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |&gt;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(year_added) |&gt;</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(count = n())</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(love_titles, aes(x = year_added, y = count)) +</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_line(color = "red") +</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point() +</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_x_continuous(breaks = seq(2000, 2021, by = 1)) +</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(title = "Netflix Titles Containing 'Christmas' Released Over the Years",</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="in">       x = "Year", y = "Number of Titles")</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_2019 &lt;- netflix_titles |&gt;</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |&gt;</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(year_added == 2020) |&gt;</span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(str_detect(title, "Christmas")) |&gt;</span></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="in">  count(type)</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(christmas_2019, aes(x = type, y = n, fill = type)) +</span></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_bar(stat = "identity") +</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(title = "Netflix Movies vs TV Shows Containing 'Christmas' Added in 2019", </span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="in">       x = "Type", y = "Count")</span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>The bar graph shows whether more movies or TV shows with "Christmas" in the title were released in 2020, the year with the most releases with "Christmas" in the title on Netflix. From the graph we can see that 25 of the releases were movies and 5 were TV shows, indicating that Netflix released 5x more movies than tv shows with the word "Christmas" in the title in that year.</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>However, I also wanted to see the proportion of movies containing "Christmas" over the years. Therefore, I calculated the proportion of all titles containing "Christmas" in the title released over the last years by dividing it by the total number of new titles added to Netflix.</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_proportions &lt;- netflix_titles |&gt;</span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |&gt;</span></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(year_added) |&gt;</span></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(total_titles = n(), christmas_titles = sum(str_detect(title, "Christmas"))) |&gt;</span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(proportion = christmas_titles / total_titles)</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>The graph shows a steady increase in the number of Netflix titles containing "Christmas" from 2013 and peaking in 2020. However, then there is a massive drop to nearly zero in 2021, likely due to filming delays caused by COVID-19.</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-alt: "Bar chart comparing the number of Netflix movies and TV shows containing the word 'Christmas' that were added in 2019, the year with the most titles containing 'Christmas' released. Around 25 were movies, while only about 5 were TV shows."</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_2019 &lt;- netflix_titles |&gt;</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |&gt;</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(year_added == 2020) |&gt;</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(str_detect(title, "Christmas")) |&gt;</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="in">  count(type)</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(christmas_2019, aes(x = type, y = n, fill = type)) +</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_bar(stat = "identity") +</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(title = "Netflix Movies vs TV Shows Containing 'Christmas' Added in 2019", </span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="in">       x = "Type", y = "Count")</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>The bar graph shows whether more movies or TV shows with "Christmas" in the title were released in 2020, the year with the most releases with "Christmas" in the title on Netflix. From the graph we can see that 25 of the releases were movies and 5 were TV shows, indicating that Netflix released 5x more movies than tv shows with the word "Christmas" in the title in that year.</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>However, I also wanted to see the proportion of movies containing "Christmas" over the years. Therefore, I calculated the proportion of all titles containing "Christmas" in the title released over the last years by dividing it by the total number of new titles added to Netflix.</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-alt: "Line graph showing the proportion of Netflix released titles containing the word 'Christmas' over the years. There is a very drastic increase from 0% to around 0.9% in 2013, followed by a significant drop and relatively stable low proportions, with a slight increase again in 2020."</span></span>
 <span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(christmas_proportions, aes(x = year_added, y = proportion)) +</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_line(color = "red") +</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point() +</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="in"> scale_x_continuous(limits = c(2011, 2021), breaks = seq(2011, 2021, 1)) +</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(title = "Proportion of Netflix Titles Containing 'Christmas' Over Time",</span></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="in">       x = "Year", y = "Proportion")</span></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>Before 2013, there were no Netflix titles containing the word "Christmas," as shown in the previous graph. Although the total number of titles containing "Christmas" in 2013 was relatively low, that year had the highest proportion of "Christmas" titles relative to total releases. This shows that Netflix’s overall content volume has increased significantly in past years and Christmas themed titles made up the largest share of new releases in 2013 compared to any other year.</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_words &lt;- netflix_titles |&gt; </span></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(after_christmas = str_to_lower(str_extract(title, "(?&lt;=Christmas\\s)\\w+"))) |&gt;</span></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(!is.na(after_christmas)) |&gt;</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(after_christmas) |&gt;</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(n = n()) |&gt; </span></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="in">  arrange(desc(n)) |&gt;</span></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="in">  head(10)</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_proportions &lt;- netflix_titles |&gt;</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(year_added = as.numeric(str_extract(date_added, "\\d{4}"))) |&gt;</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(year_added) |&gt;</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(total_titles = n(), christmas_titles = sum(str_detect(title, "Christmas"))) |&gt;</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(proportion = christmas_titles / total_titles)</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(christmas_proportions, aes(x = year_added, y = proportion)) +</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_line(color = "red") +</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point() +</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="in"> scale_x_continuous(limits = c(2011, 2021), breaks = seq(2011, 2021, 1)) +</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(title = "Proportion of Netflix Titles Containing 'Christmas' Over Time",</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="in">       x = "Year", y = "Proportion")</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>Before 2013, there were no Netflix titles containing the word "Christmas," as shown in the previous graph. Although the total number of titles containing "Christmas" in 2013 was relatively low, that year had the highest proportion of "Christmas" titles relative to total releases. This shows that Netflix’s overall content volume has increased significantly in past years and Christmas themed titles made up the largest share of new releases in 2013 compared to any other year.</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-alt: "Table showing the 10 most common words that appear directly after 'Christmas' in Netflix titles. The most frequent words are 'special' and 'with' each appering 4 times, followed by 'prince', appearing 3 times, and words like 'chronicles', 'wedding', and 'wish' each appearing twice."</span></span>
 <span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_words</span></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>The table presents the top 10 most common words after "Christmas" in Netflix titles. The most common word is "Special" and "with" both appearing 4 times. This is followed by "prince" occurring 3 times. The words "chronicles", "in", "wedding" and "wish" each appear two times.</span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>Since "with" and "special" are the most common words that follow "Christmas," I wanted to see the titles that contain the phrase "Christmas with" to see what words or phrases come after those titles.</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE}</span></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_with_phrase &lt;- netflix_titles |&gt; </span></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(str_detect(str_to_lower(title), "christmas with")) |&gt; </span></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(after_with = str_to_lower(str_extract(title, "(?i)(?&lt;=christmas with\\s).+"))) |&gt; </span></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="in">  select(after_with)</span></span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_with_phrase</span></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>The four titles containing the phrase "Christmas with" are shown in the table above. The words that follow "Christmas with" in are: "a Prince," "a View," "the Kranks," and "my Father."</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_words &lt;- netflix_titles |&gt; </span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(after_christmas = str_to_lower(str_extract(title, "(?&lt;=Christmas\\s)\\w+"))) |&gt;</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(!is.na(after_christmas)) |&gt;</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(after_christmas) |&gt;</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(n = n()) |&gt; </span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="in">  arrange(desc(n)) |&gt;</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="in">  head(10)</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_words</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>The table presents the top 10 most common words after "Christmas" in Netflix titles. The most common word is "Special" and "with" both appearing 4 times. This is followed by "prince" occurring 3 times. The words "chronicles", "in", "wedding" and "wish" each appear two times.</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>Since "with" and "special" are the most common words that follow "Christmas," I wanted to see the titles that contain the phrase "Christmas with" to see what words or phrases come after those titles.</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE}</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-alt: "Table showing phrases/words that follow 'Christmas with' in Netflix titles. The four examples are 'a prince', 'a view', 'the kranks', and 'my father'."</span></span>
 <span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>Bansal, S. (2021). Netflix Movies and TV Shows Dataset. Kaggle. Original Source: <span class="ot">&lt;https://www.kaggle.com/datasets/shivamb/netflix-shows&gt;</span></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>Accessed via TidyTuesday GitHub repository: <span class="ot">&lt;https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_with_phrase &lt;- netflix_titles |&gt; </span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(str_detect(str_to_lower(title), "christmas with")) |&gt; </span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(after_with = str_to_lower(str_extract(title, "(?i)(?&lt;=christmas with\\s).+"))) |&gt; </span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="in">  select(after_with)</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="in">christmas_with_phrase</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>The four titles containing the phrase "Christmas with" are shown in the table above. The words that follow "Christmas with" in are: "a Prince," "a View," "the Kranks," and "my Father."</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>Bansal, S. (2021). Netflix Movies and TV Shows Dataset. Kaggle. Original Source: <span class="ot">&lt;https://www.kaggle.com/datasets/shivamb/netflix-shows&gt;</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>Accessed via TidyTuesday GitHub repository: <span class="ot">&lt;https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

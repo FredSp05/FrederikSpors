@@ -7,6 +7,8 @@ execute:
 ---
 
 ```{r, echo=FALSE}
+#| fig-alt: "Line graph showing the total number of flights on average in every month from 2010-2018 in 90 countries. The number of flights peak in July, probably because of holidays."
+
 library(ggplot2)
 library(dplyr)
 library(readr)
@@ -29,7 +31,7 @@ ggplot(monthly_totals, aes(x = Month, y = total_flights, group = 1)) +
 
 ```
 
-This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The TidyTuesday is from 2024-12-24 and the data set comes from Eurocontrol.
+This line graphs shows the total number of flights on average in every month in 90 countries from 2010-2018. The line graph shows that air travel peaks around July, probably due to holidays. The TidyTuesday dataset is from 2024-12-24 and the data set originally comes from Eurocontrol.
 
-ANS Performance. (2025). European Air Navigation Performance Review Reports. Original Source: <https://ansperformance.eu/data/>
+EUROCONTROL. (2025). European Air Navigation Performance Review Reports. Original Source: <https://ansperformance.eu/data/>
 Accessed via TidyTuesday GitHub repository: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2022/2022-07-12/readme.md>

@@ -16,6 +16,8 @@ In this project, I examined how working remotely vs. working in-office affects t
 To understand the observed differences in productivity between the two groups, a box-plot was created to see the distribution of productivity for both remote and in-office workers:
 
 ```{r, echo=FALSE}
+#| fig-alt: "Boxplot comparing productivity scores for remote and in-office workers. Remote workers show a higher median productivity score and greater spread. In-office workers have a lower median and less dispersed distribution."
+
 library(dplyr)
 library(ggplot2)
 library(purrr)
@@ -44,7 +46,9 @@ Alternative Hypothesis: Remote workers are more productive than in-office worker
 
 The data for the type of work setting was shuffled 1000 times and the difference in means and medians was calculated to create a null distribution.
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
+#| fig-alt: "Table showing the first 10 permutations of the difference in mean and median productivity scores between remote and in-office work. The observed differences are constant across rows, while the permuted differences vary randomly."
+
 remote_summary <- remote |> 
   group_by(typework) |> 
   summarize(ave_productivity = mean(productivity),
@@ -75,6 +79,11 @@ perm_data <- function(rep, data){
 
 map(c(1:10), perm_data, data = remote) |> 
   list_rbind()
+```
+
+
+```{r, echo=FALSE}
+#| fig-alt: "Histogram of permuted mean differences in productivity scores between remote and in-office workers. The distribution is centered around zero, and a red vertical line is at around 9.86. This line shows the observed mean difference and is very far to the right of the null distribution, suggesting statistical significance."
 
 set.seed(47)
 perm_stats <- map(1:1000, perm_data, data = remote) |> 
@@ -87,6 +96,10 @@ perm_stats |>
     labs(title = "Null Distribution of Mean Difference for Remote vs. In-Office Work",
        x = "Permuted Mean Difference",
        y = "Count")
+```
+
+```{r, echo = FALSE}
+#| fig-alt: "Histogram of permuted median differences between productivity scores for remote and in-office work. The distribution is centered around zero, and a red vertical line is at around 9.86. This line shows the observed median difference and is very far to the right of the null distribution, suggesting statistical significance."
 
 perm_stats |> 
   ggplot(aes(x = perm_med_diff)) + 
@@ -97,6 +110,7 @@ perm_stats |>
        y = "Count")
 ```
 
+
 In the first histogram, each bar represents how often a particular mean difference in productivity (between remote and in-office workers) appeared when the work setting labels were randomly shuffled. This forms the null distribution, meaning what we would've expected if work setting had no effect. However, the red line shows the observed mean difference and was around 9.86. Since the null distribution is very clustered around 0, the likelihood of this result occurring is very low. This provides strong evidence that remote workers are significantly more productive than in-office workers and we reject the null hypothesis and accept the alternative hypothesis.
 
 The second histogram displays the same idea, but using the median instead of the mean. The red line shows the observed median difference and the distribution represents the shuffled, null hypothesis. The red line has a value of 9 and is very far away from the random outcomes which is also clustered around 0. Therefore, the median difference is also statistically significant and we reject the null hypothesis and accept the alternative hypothesis.
@@ -104,6 +118,8 @@ The second histogram displays the same idea, but using the median instead of the
 To confirm these results, we have to find the p-values, shown in the table.
 
 ```{r, echo=FALSE}
+#| fig-alt: "Table showing p-values for the permutation test of mean and median differences in productivity scores between remote and in-office work. Both p-values are 0, indicating that none of the 1000 permuted differences were as extreme as the observed differences. Thus, we can reject the null hypothesis and the observed differences are unlikely due to chance"
+
 perm_stats |> 
   summarize(p_val_ave = mean(perm_ave_diff > obs_ave_diff),
             p_val_med = mean(perm_med_diff > obs_med_diff))
