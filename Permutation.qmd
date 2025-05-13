@@ -109,6 +109,6 @@ perm_stats |>
             p_val_med = mean(perm_med_diff > obs_med_diff))
 ```
 
-Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance.
+Since the p-values are 0, we reject the null hypothesis. This provides strong evidence that remote workers are more productive than in-office workers, and that the observed differences are unlikely to be due to chance in this fictional dataset.
 
 The data set used for this project comes from a Kaggle and was published by hbsaakashyadav, which contains fictional survey-based data comparing productivity between remote and in-office workers: <https://www.kaggle.com/code/hbsaakashyadav/remote-work-productivity/input>
