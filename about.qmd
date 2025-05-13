@@ -1,5 +1,0 @@
----
-title: "About"
----
-
-Link to the Website: <https://github.com/FredSp05/FrederikSpors>
